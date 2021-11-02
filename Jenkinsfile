@@ -32,7 +32,12 @@ pipeline {
                 steps {
                     dir('nginx'){
                         sh "docker stop nginx"
-                        sh "docker rm nginx"
+                        sh '''
+                        if [ ! "$(docker ps -q -f name=nginx)" ]; then
+                            docker rm nginx
+                        fi
+                        '''
+                        // sh "docker rm nginx"
                         sh "docker run --name nginx -v ${WORKSPACE}/dir_3/:/usr/share/nginx/html:ro -d -p 80:80 nginx"
                     }
                 }
