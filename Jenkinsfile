@@ -32,7 +32,7 @@ pipeline {
                 steps {
                     dir('nginx'){
                         sh '''
-                        if [ ! "$(docker ps -q -f name=nginx)" ]; then
+                        if [ "$(docker ps -q -f name=nginx)" ]; then
                             docker stop nginx
                             docker rm nginx
                         fi
