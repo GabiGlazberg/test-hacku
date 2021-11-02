@@ -9,19 +9,6 @@ pipeline {
                     sh "ls"
                 }
             }
-            // steps {
-            //     dir('dir_2'){
-            //         sh "cp env.WORKSPACE/dir_1/** ."
-            //         sh "date | tee -a file{0..9}.txt"
-            //         sh "ls"
-            //     }
-            // }
-            // steps {
-            //     dir('dir_3'){
-            //         sh "cp env.WORKSPACE/dir_2/** ."
-            //         sh "chmod 0444 ./"
-            //     }
-            // }
         }
         stage('Copy files') {
             steps {
@@ -29,6 +16,14 @@ pipeline {
                     sh "cp env.WORKSPACE/dir_1/** ."
                     sh "date | tee -a file{0..9}.txt"
                     sh "ls"
+                }
+            }
+        }
+        stage('Copy files 3') {
+            steps {
+                dir('dir_3'){
+                    sh "cp env.WORKSPACE/dir_2/** ."
+                    sh "chmod 0444 ./"
                 }
             }
         }
