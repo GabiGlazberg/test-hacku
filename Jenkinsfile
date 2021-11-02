@@ -32,8 +32,8 @@ pipeline {
             stage('Build Nginx') {
                 steps {
                     dir('nginx'){
-                        sh "cp -a ${WORKSPACE}/dir_3/. ."
-                        sh "docker run --name nginx -v ./:/usr/share/nginx/html:ro -d nginx"
+                        //sh "cp -a ${WORKSPACE}/dir_3/. ."
+                        sh "docker run --name nginx -v ${WORKSPACE}/dir_3/:/usr/share/nginx/html:ro -d nginx"
                     }
                 }
             }
