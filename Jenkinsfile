@@ -25,15 +25,15 @@ pipeline {
                 steps {
                     dir('dir_3'){
                         sh "cp  -a ${WORKSPACE}/dir_2/. ."
-                        sh "chmod 0444 ./"
+                        //sh "chmod 0444 ./"
                     }
                 }
             }
             stage('Build Nginx') {
                 steps {
                     dir('nginx'){
-                        sh "cp  -a ${WORKSPACE}/dir_3/. ."
-                        sh "docker run --name nginx -v ./:/usr/share/nginx/html -d nginx"
+                        sh "cp -a ${WORKSPACE}/dir_3/. ."
+                        sh "docker run --name nginx -v ./:/usr/share/nginx/html:ro -d nginx"
                     }
                 }
             }
