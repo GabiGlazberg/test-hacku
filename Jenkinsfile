@@ -6,12 +6,14 @@ pipeline {
             steps {
                 dir('dir_1'){
                     echo "some text in file" | tee file{0..9}.txt
+                    ls
                 }
             }
             steps {
                 dir('dir_2'){
                     sh "cp env.WORKSPACE/dir_1/** ."
                     sh "date | tee -a file{0..9}.txt"
+                    ls
                 }
             }
             steps {
@@ -24,7 +26,7 @@ pipeline {
         stage('Build Nginx') {
             steps {
                 dir('nginx'){
-                    docker run --name nginx -v env.WORKSPACE/dir_2:/usr/share/nginx/html:ro -d nginx
+                    sh "docker run --name nginx -v env.WORKSPACE/dir_2:/usr/share/nginx/html:ro -d nginx"
                 }
             }
         }
