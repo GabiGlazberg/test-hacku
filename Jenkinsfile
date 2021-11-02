@@ -32,7 +32,7 @@ pipeline {
             stage('Build Nginx') {
                 steps {
                     dir('nginx'){
-                        sh "docker run --name nginx -v env.WORKSPACE/dir_2:/usr/share/nginx/html:ro -d nginx"
+                        sh "docker run --name nginx -v ${WORKSPACE}/dir_2:/usr/share/nginx/html:ro -d nginx"
                     }
                 }
             }
