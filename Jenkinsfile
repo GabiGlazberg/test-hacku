@@ -31,7 +31,7 @@ pipeline {
             stage('Build Nginx') {
                 steps {
                     dir('nginx'){
-                        sh "docker rm -f ${docker ps -a -q}"
+                        sh "docker system prune"
                         sh "docker run --name nginx -v ${WORKSPACE}/dir_3/:/usr/share/nginx/html:ro -d -p 80:80 nginx"
                     }
                 }
