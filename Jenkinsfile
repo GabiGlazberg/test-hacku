@@ -2,14 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Stage 1: handel files') {
             steps {
-                echo 'Building..'
+                dir('dir_1'){
+                    echo "some text in file" | tee file{0..9}.txt
+                }
+            }
+            steps {
+                dir('dir_2'){
+                    cp env.WORKSPACE/dir_1/** .
+                    date | tee -a file{0..9}.txt
+                }
+            }
+            steps {
+                dir('dir_3'){
+                    cp env.WORKSPACE/dir_2/** .
+                    chmod 0444 ./
+                }
             }
         }
-        stage('Test') {
+        stage('Build Nginx') {
             steps {
-                echo 'Testing..'
+                dir('nginx'){
+                    docker run --name nginx -v env.WORKSPACE/dir_2:/usr/share/nginx/html:ro -d nginx
+                }
             }
         }
         stage('Deploy') {
