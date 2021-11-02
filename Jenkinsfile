@@ -31,9 +31,9 @@ pipeline {
             stage('Build Nginx') {
                 steps {
                     dir('nginx'){
-                        sh "docker stop nginx"
                         sh '''
                         if [ ! "$(docker ps -q -f name=nginx)" ]; then
+                            docker stop nginx
                             docker rm nginx
                         fi
                         '''
