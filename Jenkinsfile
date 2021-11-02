@@ -6,14 +6,13 @@ pipeline {
             steps {
                 dir('dir_1'){
                     sh "echo some text in file | tee file{0..9}.txt"
-                    sh "ls"
                 }
             }
         }
-        stage('Copy files') {
+        stage('Copy files and add date to the text') {
             steps {
                 dir('dir_2'){
-                    sh "cp env.WORKSPACE/dir_1/** ."
+                    sh "cp 'env.WORKSPACE/dir_1/'* ."
                     sh "date | tee -a file{0..9}.txt"
                     sh "ls"
                 }
@@ -22,7 +21,7 @@ pipeline {
         stage('Copy files 3') {
             steps {
                 dir('dir_3'){
-                    sh "cp env.WORKSPACE/dir_2/** ."
+                    sh "cp env.WORKSPACE/dir_2/* ."
                     sh "chmod 0444 ./"
                 }
             }
