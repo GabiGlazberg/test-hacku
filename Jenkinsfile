@@ -5,15 +5,15 @@ pipeline {
         stage('Stage 1: handel files') {
             steps {
                 dir('dir_1'){
-                    echo "some text in file" | tee file{0..9}.txt
-                    ls
+                    sh "echo some text in file | tee file{0..9}.txt"
+                    sh "ls"
                 }
             }
             steps {
                 dir('dir_2'){
                     sh "cp env.WORKSPACE/dir_1/** ."
                     sh "date | tee -a file{0..9}.txt"
-                    ls
+                    sh "ls"
                 }
             }
             steps {
