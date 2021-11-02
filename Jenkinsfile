@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent test-slave
 
     stages {
         stage('Stage 1: handel files') {
