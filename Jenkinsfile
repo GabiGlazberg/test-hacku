@@ -37,7 +37,7 @@ pipeline {
                             docker rm nginx
                         fi
                         '''
-                        sh "docker run --name nginx -v ${WORKSPACE}/dir_3/:/usr/share/nginx/html -d -p 80:80 nginx"
+                        sh "docker run --name nginx -v ${WORKSPACE}/dir_3/.:/usr/share/nginx/html -d -p 80:80 nginx"
                     }
                 }
             }
