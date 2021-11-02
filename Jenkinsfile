@@ -10,14 +10,14 @@ pipeline {
             }
             steps {
                 dir('dir_2'){
-                    cp env.WORKSPACE/dir_1/** .
-                    date | tee -a file{0..9}.txt
+                    sh "cp env.WORKSPACE/dir_1/** ."
+                    sh "date | tee -a file{0..9}.txt"
                 }
             }
             steps {
                 dir('dir_3'){
-                    cp env.WORKSPACE/dir_2/** .
-                    chmod 0444 ./
+                    sh "cp env.WORKSPACE/dir_2/** ."
+                    sh "chmod 0444 ./"
                 }
             }
         }
