@@ -1,6 +1,9 @@
 pipeline {
-    agent any
-    node('test-slave'){
+    agent {
+        node {
+            label 'test-slave'
+            }
+        }
         stages {
             stage('Stage 1: handel files') {
                 steps {
@@ -34,5 +37,4 @@ pipeline {
                 }
             }
         }
-    }
 }
